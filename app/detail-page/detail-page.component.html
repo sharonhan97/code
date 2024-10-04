@@ -1,0 +1,282 @@
+<div class="progress" *ngIf="!ready">
+    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+<div class="container" *ngIf="ready">
+    <div class="title">
+        {{title}}
+    </div>
+    <div class="row" style="margin: 10px 0;">
+        <div class="col-10 col-sm-11">
+            <button (click)="goBack()" class="back">
+                <span class="material-icons">
+                    chevron_left
+                </span>List
+            </button>
+        </div>
+        <div class="col-2 col-sm-1 d-flex justify-content-end">
+                <button (click)="shareToFacebook()" class="facebookButton">
+                    <img src="/assets/facebook.png" alt="Share on Facebook" style="height: 30px;width: 30px;">
+                </button>                 
+                <span class="material-icons" *ngIf="!wish" (click)="addWishList()" style="height: 30px;width: 30px;padding-top: 2px;margin-left: 3px;">
+                    add_shopping_cart
+                </span>
+                <span class="material-icons" *ngIf="wish" (click)="addWishList()"  style="height: 30px;width: 30px; color: #bda058;margin-left: 3px;">
+                    remove_shopping_cart
+                </span>                
+        </div>       
+    </div>
+    <ul class="tab row">
+        <li (click)="show='product'" 
+        [style.backgroundColor]="show === 'product' ? 'black' : 'white'"
+        [style.color]="show === 'product' ? 'white' : 'black'"
+        class="offset-3 col-2 col-sm-1">Product</li>
+        <li (click)="show='photo'" 
+        [style.backgroundColor]="show === 'photo' ? 'black' : 'white'"
+        [style.color]="show === 'photo' ? 'white' : 'black'"
+        class="col-2 col-sm-1">Photos</li>
+        <li (click)="show='shipping'"
+        [style.backgroundColor]="show === 'shipping' ? 'black' : 'white'"
+        [style.color]="show === 'shipping' ? 'white' : 'black'"
+        class="col-2 col-sm-1">Shipping</li>
+        <li (click)="show='seller'"
+        [style.backgroundColor]="show === 'seller' ? 'black' : 'white'"
+        [style.color]="show === 'seller' ? 'white' : 'black'"
+        class="col-2 col-sm-1">Seller</li>
+        <li (click)="show='similar'"
+        [style.backgroundColor]="show === 'similar' ? 'black' : 'white'"
+        [style.color]="show === 'similar' ? 'white' : 'black'"
+        class="col-4 col-sm-2"
+        >Similar Products</li>
+    </ul>
+    <table class="product" *ngIf="ready && show=='product'">
+        <tr>
+            <td>Product Images</td>
+            <td>
+                <span (click)="openModal(photoModal)" style="cursor:pointer;color:#43737e">View Product Images Here</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>{{price}}</td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>{{location}}</td>
+        </tr>
+        <tr *ngIf="ret">
+            <td>Return Policy</td>
+            <td>{{ret}}</td>
+        </tr>
+        <tr *ngFor="let item of spec">
+            <td>{{item.Name}}</td>
+            <td>{{item.Value[0]}}</td>
+        </tr>
+    </table>
+
+    <ng-template #photoModal let-modal>
+        <div class="modal-header">
+          <h6 class="modal-title">Product Images</h6>
+          <button type="button" class="modal-close-top" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ngb-carousel [interval]="0">
+                <ng-template ngbSlide *ngFor="let image of images">
+                    <a href="{{image}}" target="_blank"><img [src]="image" alt="Product Image" style="width: 100%; height: 100%;"></a>
+                </ng-template>
+             </ngb-carousel>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </ng-template>
+
+    <div class="photo" *ngIf="ready && show=='photo'">
+        <div class="row">
+            <div class="col-sm-4 col-12">
+                <a href="{{photolink[0]}}" target="_blank">
+                   <img src="{{photolink[0]}}" class="img-fluid mb-2" alt=""> 
+                </a>
+                <a href="{{photolink[1]}}" target="_blank">
+                    <img src="{{photolink[1]}}" class="img-fluid mb-2" alt="">
+                </a>                
+            </div>
+            <div class="col-sm-4 col-12">
+                <a href="{{photolink[2]}}" target="_blank">
+                    <img src="{{photolink[2]}}" class="img-fluid mb-2" alt="">
+                </a>
+                <a href="{{photolink[3]}}" target="_blank">
+                    <img src="{{photolink[3]}}" class="img-fluid mb-2" alt="">
+                </a>
+                <a href="{{photolink[4]}}" target="_blank">
+                    <img src="{{photolink[4]}}" class="img-fluid mb-2" alt="">
+                </a>             
+            </div>
+            <div class="col-sm-4 col-12">
+                <a href="{{photolink[5]}}" target="_blank">
+                    <img src="{{photolink[5]}}" class="img-fluid mb-2" alt="">
+                </a>
+                <a href="{{photolink[6]}}" target="_blank">
+                    <img src="{{photolink[6]}}" class="img-fluid mb-2" alt="">
+                </a>
+                <a href="{{photolink[7]}}" target="_blank">
+                    <img src="{{photolink[7]}}" class="img-fluid mb-2" alt="">
+                </a>                
+            </div>
+        </div>
+    </div>
+
+    <table class="shipping" *ngIf="ready && show=='shipping'">
+        <tr *ngIf="shipCost">
+            <td>Shipping Cost</td>
+            <td>{{shipCost}}</td>
+        </tr>
+        <tr *ngIf="shipLocation">
+            <td>Shipping Locations</td>
+            <td>{{shipLocation}}</td>
+        </tr>
+        <tr *ngIf="shipHandleTime">
+            <td>Handling Time</td>
+            <td>{{shipHandleTime}}</td>
+        </tr>
+        <tr *ngIf="expeditedShip">
+            <td>Expedited Shipping</td>
+            <td *ngIf="expeditedShip==='true'"><span class="material-symbols-outlined md18 greenCheck">
+                &#xe5ca;
+                </span>
+            </td>
+            <td *ngIf="expeditedShip==='false'"><span class="material-symbols-outlined md18 redCross">
+                &#xe5cd;
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="oneDayShip">
+            <td>One Day Shipping</td>
+            <td *ngIf="oneDayShip==='true'"><span class="material-symbols-outlined md18 greenCheck">
+                &#xe5ca;
+                </span>
+            </td>
+            <td *ngIf="oneDayShip==='false'"><span class="material-symbols-outlined md18 redCross">
+                &#xe5cd;
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="returnAccept">
+            <td>Return Accepted</td>
+            <td *ngIf="returnAccept==='true'"><span class="material-symbols-outlined md18 greenCheck">
+                &#xe5ca;
+                </span>
+            </td>
+            <td *ngIf="returnAccept==='false'"><span class="material-symbols-outlined md18 redCross">
+                &#xe5cd;
+                </span>
+            </td>
+        </tr>
+    </table>
+
+    <table class="seller" *ngIf="ready && show=='seller'">
+        <tbody>
+            <tr class="sellerIdTitle">
+                <td colspan="2">
+                    <h4>{{sellerId}}</h4>
+                </td>
+            </tr>
+            <tr *ngIf="feedbackScore">
+                <td>Feedback Score</td>
+                <td>{{feedbackScore}}</td>
+            </tr>
+            <tr>
+                <td>Popularity</td>
+                <td style="position: relative; display: flex; align-items: center; height: 60px;">
+                    <div style="position: relative; flex-shrink: 0;">
+                        <round-progress [current]="current" [max]="max" [radius]="25" color="#008000" [stroke]="2"></round-progress>
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            {{ popularity }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Feedback Rating Star</td>
+                <td>
+                    <span class="material-icons" [style.color]="feedbackColor" *ngIf="feedbackScoreNum>10000">
+                        &#xe8d0;
+                    </span>
+                    <i class="material-icons" [style.color]="feedbackColor" *ngIf="feedbackScoreNum<=10000 && feedbackScoreNum>9">star_border</i>
+                    <span *ngIf="feedbackScoreNum<=9">
+                        N/A
+                    </span>
+                </td>
+            </tr>
+            <tr *ngIf="topRated">
+                <td>Top Rated</td>
+                <td *ngIf="topRated==='true'"><span class="material-symbols-outlined md18 greenCheck">
+                    &#xe5ca;
+                    </span>
+                </td>
+                <td *ngIf="topRated==='false'"><span class="material-symbols-outlined md18 redCross">
+                    &#xe5cd;
+                    </span>
+                </td>
+            </tr>
+            <tr *ngIf="storeName">
+                <td>Store Name</td>
+                <td>{{storeName}}</td>
+            </tr>
+            <tr *ngIf="buyProduct">
+                <td>Buy Product At</td>
+                <td>
+                    <a href={{buyProduct}} target="_blank" style="color: #43737e;text-decoration: none;">Store</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="similar" *ngIf="ready && show=='similar' && displaysimilar.length>=1">
+        <div class="row">
+            <div class="col-sm-2 col-12">
+                <select [(ngModel)]="sortCate" (change)="updateSimilarItems()" class="selectOrder form-control">
+                    <option value="default">Default</option>
+                    <option value="title">Product Name</option>
+                    <option value="daysleft">Days Left</option>
+                    <option value="price">Price</option>
+                    <option value="shipcost">Shipping Cost</option>
+                </select>
+            </div>
+            <div class="col-sm-2 col-12">
+                <select [(ngModel)]="sortOrder" [disabled]="sortCate === 'default'" (change)="updateSimilarItems()" class=" form-control">
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
+            </div>
+        </div>      
+        <div *ngFor="let item of displaysimilar" class="line row">
+            <div class="pic col-12 col-sm-2">
+                <img [src]="item['image']" alt="">
+            </div>
+            <div class="text col-sm-10">
+                <div style="color: #365b6a;">
+                    {{item['title']}}
+                </div>
+                <div style="color: #77a268;">
+                    Price: ${{item['price']}}
+                </div>
+                <div style="color: #9f7033;">
+                    Shipping Cost: ${{item['shipcost']}}
+                </div>
+                <div style="color: white;">
+                    Days Left: {{item['daysleft']}}
+                </div>
+            </div>       
+        </div>
+        
+        <div class="showButton">
+            <button *ngIf="similaritems.length > 5" (click)="letShowAll()">
+                {{ showAll ? 'Show Less' : 'Show More' }}
+            </button>
+        </div>
+    </div>
+    <div *ngIf="ready && show=='similar' && displaysimilar.length==0" style="background-color: #fff3cd; color: #a68b3e;">
+        No Records.
+    </div>
+</div>
