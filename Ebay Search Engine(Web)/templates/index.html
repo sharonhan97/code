@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="title">
+        <img src="https://csci571.com/hw/hw6/images/eBayLogo.png" alt="logo" class="Ebay-Logo">
+        <span>Shopping</span>
+    </div>
+    <form>
+        <label class="keyword">
+            <span>Keywords<span class="redstar">*</span>: </span>
+            <input type="text" id="keywordInput" name="Keywords" required>
+        </label>
+        <label class="price">
+            <span>Price Range: </span>
+            From <input type="number" id="minPrice" name="MinPrice"> to <input type="number" id="maxPrice" name="MaxPrice">
+        </label>
+        <label class="condition">
+            <span>Condition: </span>
+            <input type="checkbox" name="condition" value="1000">New
+            <input type="checkbox" name="condition" value="3000">Used
+            <input type="checkbox" name="condition" value="4000">Very Good
+            <input type="checkbox" name="condition" value="5000">Good
+            <input type="checkbox" name="condition" value="6000">Acceptable
+        </label>
+        <label class="Seller">
+            <span>Seller: </span>
+            <input type="checkbox" name="ReturnsAcceptedOnly" value="true">Return Accepted
+        </label>
+        <label class="shipping">
+            <span>Shipping: </span>
+            <input type="checkbox" name="FreeShippingOnly" value="true">Free
+            <input type="checkbox" name="ExpeditedShippingType" value="Expedited">Expedited
+        </label>
+        <label class="sort">
+            <span>Sort By: </span>
+            <select name="sortOrder">
+                <option value="BestMatch" selected>Best Match</option>
+                <option value="CurrentPriceHighest">Price: highest first</option>
+                <option value="PricePlusShippingHighest">Price + Shipping: highest first</option>
+                <option value="PricePlusShippingLowest">Price + Shipping: lowest first</option>
+            </select>
+        </label>
+        <div>
+            <input type="reset" class="clear" value="Clear">
+            <input type="submit" class="search" value="Search">
+        </div>
+    </form>
+    <div class="itemList">
+        <div class="result"></div>
+        <div class="container"></div>
+    </div>
+    <div class="detail">
+        <div id="detailTitle">
+            Item Details
+        </div>
+        <button id="backButton">Back to search results</button>
+        <table id="detailInfo">
+        </table>
+    </div>
+    <script src="static/jquery-3.7.1.min.js"></script>
+    <script src="static/event.js"></script>
+</body>
+</html>

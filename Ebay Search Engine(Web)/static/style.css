@@ -1,0 +1,232 @@
+*{
+    border: 0;
+    margin: 0;
+}
+.title{
+    display: flex;
+    align-items: center;
+    width: 280px;
+    height: 70px;
+    margin: 0 auto;
+}
+.title>img{
+    height: 70px;
+    width: 150px;
+    cursor: pointer;
+}
+.title>span{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+form{
+    width: 550px;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+form>label,form>div{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+form>label>span{
+    font-weight: bolder;
+}
+form input,form select{
+    border: solid thin gray;
+    height: 20px;
+    margin: 0 10px;
+    border-radius: 3px;
+}
+form .redstar{
+    color: red;
+    margin-right: 0;
+}
+form .keywordInput{
+    width: 140px;
+}
+form .price span{
+    margin-right: 10px;
+}
+#minPrice, #maxPrice{
+    width: 50px;
+}
+form select option{
+    text-align: center;
+}
+form .search:hover{
+    background-color: #2980b9;
+}
+form .clear:hover{
+    background-color: #2980b9;
+}
+
+.itemList{
+    display:none;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.itemList>.result{
+    margin: 0 auto;
+    width: 800px;
+    height: 60px;
+    border-bottom: solid thin #eee;
+    font-size: 20px;
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#noResult{
+    height: 60px;
+    margin-top: 60px;
+    border: hidden;
+}
+
+.container{
+    margin: 0 auto;
+    width: 800px;
+}
+
+.container .list{
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    margin: 3px;
+    background-color: #eee;
+    border: solid thin black;
+    border-radius: 3px;
+}
+
+.container .list:hover{
+    box-shadow: 0px 0px 5px 3px lightgrey;
+}
+
+.container .list .itemPic{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 30px;
+    width: 100px;
+}
+
+.container .list .itemPic img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: solid 2px lightgray;
+    transition: transform 0.5s ease
+}
+
+.container .list .itemPic:hover{
+    transform: scale(1.5);
+}
+
+.container .list .info{
+    height: 100%;
+    width: 610px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.itemList .list .info div {
+    width: 610px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.container .list .info .itemName{
+    font-weight: bolder;
+    height: 35%;
+    line-height: 350%;
+}
+.itemList .list .info .itemCon{
+    flex: 1;
+}
+.itemList .list .info .itemPrice{
+    font-weight: bolder; 
+    flex:1;
+}
+.itemList .container .list .info .itemCate{
+    font-style: italic;
+    flex:1;
+}
+
+#expand{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    height: 30px;
+    padding: 8px;
+    background-color: #eee;
+    border-style: hidden;
+    border-radius: 3px
+}
+#expand:hover{
+    background-color: #2980b9;
+}
+
+#rateImg{
+    height: 25px;
+    width: 20px;
+    vertical-align: middle;
+}
+.detail{
+    margin: 0 auto;
+    width: 850px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.detail #backButton{
+    border: hidden 1px #eee;
+    border-radius: 3px;
+    background-color: #eee;
+    margin-bottom: 10px;
+}
+
+.detail #backButton:hover{
+    background-color: #2980b9;    
+}
+
+    
+
+#detailTitle{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-top: 10px;
+}
+#detailInfo{
+    border-collapse: collapse;
+    width: 100%;
+}
+#detailInfo td{
+    border: solid 1px #eee;
+}
+#detailInfo .detailkey{
+    font-weight: bolder;
+    width: 150px;
+}
+#detailPic{
+    height: 150px;
+    width: 150px;
+}
