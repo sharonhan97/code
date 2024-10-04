@@ -1,0 +1,39 @@
+<div class="progress" *ngIf="!ready&&!showdetail">
+    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div class="detail" *ngIf="ready&&!showdetail">
+    <button (click)="goDetail()" [class.disabled]="detailId===''">
+      Detail
+      <span class="material-icons">
+          chevron_right
+      </span>
+    </button>
+</div>
+
+<div class="table-responsive">
+    <table class="table" *ngIf="ready && wishdata&&!showdetail">
+            <tr>
+            <th class="index">#</th>
+            <th>Image</th>
+            <th class="title">Title</th>
+            <th>Price</th>
+            <th>Shipping</th>
+            <th>Wish List</th>
+            </tr>
+            <tr *ngFor="let item of wishdata; let i = index" 
+            [ngClass]="{
+            'row-default': true,
+            'row-even': (i+1) % 2 === 0,
+            'row-odd': (i+1) % 2 === 1,
+            'row-selected': item.itemId[0] === detailId
+            }"
+            wish-single [data]="item" [ind]="i+1">
+            </tr>  
+    </table>    
+</div>
+
+
+<div *ngIf="ready&&!wishdata&&!showdetail" style="background-color: #fff3cd; color: #a68b3e;" class="norecord">
+    No Records.
+</div>
+<detail-page [itemId]="detailId" tag="wish" *ngIf="showdetail"></detail-page>

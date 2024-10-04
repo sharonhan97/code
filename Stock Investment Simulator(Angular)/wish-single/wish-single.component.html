@@ -1,0 +1,22 @@
+<td class="index" *ngIf="wish">
+    {{ind}}
+</td>
+<td *ngIf="wish" class="photo">
+    <a href="{{img}}" target="_blank">
+        <img [src]="img" alt="item photo">        
+    </a>
+</td>
+<td class="title" [title]="title" (click)="getDetailPage()" *ngIf="wish">
+    {{cutTitle(title)}}
+</td>
+<td *ngIf="wish">
+    {{price}}
+</td>
+<td *ngIf="wish">
+    {{shipping}}
+</td>
+<td *ngIf="wish">
+    <span class="material-icons" (click)="deleteWishList()" style="color: #bda058;">
+        remove_shopping_cart
+    </span>
+</td>
